@@ -25,6 +25,7 @@ make clean     # Clean build files
 
 ### **Core Implementation and Design Choices**
 - The questions says implement LRU for applications using files, but the impelementation is different for different for different kind of applications for example a build system does not need a refernce counter for eviction but a database application does. For now I've used a sharedpointer version as a middle ground for this impelementation, which means once cache is accessed even if another thread evicts it the accessed metadata is still valid.
+- DUring add if file is already cached, Im only updating the cached time and not the metadata(we can update required metadata) but this will defeat the purpose if we have to call stat again. 
 - LRU operations are all O(1) time complexity because of the use of hashmap for look up and doubly linked list for reordering. 
 
 
